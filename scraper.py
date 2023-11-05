@@ -1,12 +1,10 @@
 import time
 
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+DEFAULT_TIMEOUT = 2
 def compare_texts(t1, t2, filename):
 	t1 = t1.split("\n")
 	t2 = t2.split("\n")
@@ -26,19 +24,19 @@ def select_ger(driver):
 	lan_select.click()
 	lan_select.send_keys(Keys.DOWN)
 	lan_select.send_keys(Keys.ENTER)
-	time.sleep(2)
+	time.sleep(DEFAULT_TIMEOUT)
 
 def select_en(driver):
 	lan_select = driver.find_element(By.XPATH, "//app-navbar//select")
 	lan_select.click()
 	lan_select.send_keys(Keys.UP)
 	lan_select.send_keys(Keys.ENTER)
-	time.sleep(2)
+	time.sleep(DEFAULT_TIMEOUT)
 
 def scrape_page(driver, url, filename):
 	driver.get(url)
 
-	time.sleep(2)
+	time.sleep(DEFAULT_TIMEOUT)
 
 	en_text = driver.find_element(By.XPATH, "/html/body").text
 	select_ger(driver)
@@ -62,5 +60,3 @@ scrape_page(driver, 'https://petropolis.progmasters.hu/login', 'login')
 scrape_page(driver, 'https://petropolis.progmasters.hu/register', 'register')
 
 driver.quit()
-
-
