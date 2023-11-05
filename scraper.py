@@ -11,7 +11,7 @@ def compare_texts(t1, t2, filename):
 	t1 = t1.split("\n")
 	t2 = t2.split("\n")
 	if len(t1) != len(t2):
-		print(filename + ': Number of English and German textfields is not equal')
+		print(filename + ': Different number of English and German textfields')
 		return
 	same_file = open(filename + "_same.txt", "w", encoding="utf-8")
 	diff_file = open(filename + "_diff.txt", "w", encoding="utf-8")
@@ -22,14 +22,14 @@ def compare_texts(t1, t2, filename):
 			diff_file.write(t1[i] + " - " + t2[i] + "\n")
 
 def select_ger(driver):
-	lan_select = driver.find_element(By.XPATH, "/html/body/app-root/div/app-navbar/nav/div/div/ul[2]/li[5]/span/select")
+	lan_select = driver.find_element(By.XPATH, "//app-navbar//select")
 	lan_select.click()
 	lan_select.send_keys(Keys.DOWN)
 	lan_select.send_keys(Keys.ENTER)
 	time.sleep(2)
 
 def select_en(driver):
-	lan_select = driver.find_element(By.XPATH, "/html/body/app-root/div/app-navbar/nav/div/div/ul[2]/li[5]/span/select")
+	lan_select = driver.find_element(By.XPATH, "//app-navbar//select")
 	lan_select.click()
 	lan_select.send_keys(Keys.UP)
 	lan_select.send_keys(Keys.ENTER)
